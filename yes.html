@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>A Special Note</title>
+<style>
+  body {
+    margin: 0;
+    background: #f9f5e7;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    user-select: none;
+  }
+  .container {
+    text-align: center;
+  }
+  h1 {
+    color: #6b6b47;
+    font-weight: 700;
+    margin-bottom: 0.2em;
+  }
+  p.subtitle {
+    color: #8a8a6a;
+    margin-top: 0;
+    margin-bottom: 2em;
+    font-size: 1.1em;
+  }
+  .envelope {
+    width: 220px;
+    height: 140px;
+    background: #d9e4c8;
+    border-radius: 12px 12px 6px 6px;
+    position: relative;
+    margin: 0 auto;
+    box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .envelope:hover {
+    transform: scale(1.05);
+  }
+  .flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 70px;
+    background: #c3d1a8;
+    border-radius: 12px 12px 0 0;
+    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.6);
+    transition: transform 0.5s ease;
+    transform-origin: top center;
+  }
+  .envelope.open .flap {
+    transform: rotateX(180deg);
+  }
+  .seal {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: #e27c7c;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(226,124,124,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: white;
+    user-select: none;
+  }
+  .note {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 320px;
+    max-width: 90vw;
+    max-height: 70vh;
+    background: #fef9e7;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    padding: 30px 25px 25px 25px;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    font-family: 'Georgia', serif;
+    color: #6b5e3c;
+    line-height: 1.5;
+    user-select: text;
+    overflow-y: auto;
+    z-index: 10;
+  }
+  .note.open {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .envelope {
+      width: 180px;
+      height: 110px;
+    }
+    .flap {
+      width: 180px;
+      height: 55px;
+    }
+    .seal {
+      width: 30px;
+      height: 30px;
+      font-size: 18px;
+      top: 38px;
+    }
+    .note {
+      width: 280px;
+      padding: 20px 15px 15px 15px;
+      font-size: 0.95rem;
+    }
+    .note h2 {
+      font-size: 1.2em;
+    }
+    .note p {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .envelope {
+      width: 140px;
+      height: 90px;
+    }
+    .flap {
+      width: 140px;
+      height: 45px;
+    }
+    .seal {
+      width: 24px;
+      height: 24px;
+      font-size: 14px;
+      top: 30px;
+    }
+    .note {
+      width: 240px;
+      padding: 15px 10px 10px 10px;
+      font-size: 0.9rem;
+    }
+    .note h2 {
+      font-size: 1em;
+    }
+    .note p {
+      font-size: 0.9rem;
+    }
+  }
+  .note h2 {
+    margin-top: 0;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 1.4em;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .note p {
+    font-size: 1.1em;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 1.5em;
+    color: #a88c6f;
+    cursor: pointer;
+    font-weight: 700;
+    user-select: none;
+  }
+  .close-btn:hover {
+    color: #6b5e3c;
+  }
+  </style>
+  <style>
+    .btn-flower {
+      background: white;
+      color: black;
+      padding: 10px 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-decoration: none;
+      display: inline-block;
+      margin: 20px auto 0 auto;
+      font-weight: 500;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .btn-flower:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>A simple letter for our monthsary</h1>
+    <p class="subtitle">Click the envelope to open</p>
+    <div class="envelope" id="envelope" aria-label="Envelope, click to open" role="button" tabindex="0">
+      <div class="flap"></div>
+      <div class="seal">❤️</div>
+    </div>
+    <a href="flower.html" class="btn-flower" style="display: block; margin: 50px auto 0 auto; max-width: 220px;">Open this loveyy!</a>
+  </div>
+
+  <div class="note" id="note" role="dialog" aria-modal="true" aria-labelledby="note-title" aria-describedby="note-content">
+    <button class="close-btn" id="closeBtn" aria-label="Close note">&times;</button>
+    <h2 id="note-title">To mylove of mylife!💖,</h2>
+    <p id="note-content">
+      Hello, my loveyy. Today is our special day. I love you so much. I just have a simple message for you on our monthsary. Happy 7th monthsary, myiyaaaaa<3! I’m so grateful that we’ve made it this far. We both know that we’ve gone through struggles, arguments, and challenges it hasn’t been easy for us. But I want you to know that I always thank the Lord for giving me someone like you. Every day that passes, you’re the one who gives me strength to keep going, even when I’m full of problems you still stay by my side.
+
+Despite everything, we are here, making our relationship stronger with each passing day. I’m looking forward to celebrating many more months, years, birthdays, and anniversaries with you. I always pray that God continues to guide us in our relationship that every fight, every emotion, and every decision we make will be under His guidance. Sometimes, it’s hard when we get carried away by our emotions and decisions, but I hope you never get tired of my silliness and immaturity. I know I’ve made mistakes, and I’m still learning more about your side so I can understand you better. Please always remember that I’ll always be here for you.
+
+And also, I want you to know how proud I am of you and all your achievements big or small. I love you so much, myiyaaaa. Happy 7th monthsary to us! ✨💖
+
+      from your, loveyy!
+    </p>
+  </div>
+
+<script>
+  const envelope = document.getElementById('envelope');
+  const note = document.getElementById('note');
+  const closeBtn = document.getElementById('closeBtn');
+
+  function openNote() {
+    envelope.classList.add('open');
+    note.classList.add('open');
+  }
+  function closeNote() {
+    envelope.classList.remove('open');
+    note.classList.remove('open');
+  }
+
+  envelope.addEventListener('click', openNote);
+  closeBtn.addEventListener('click', closeNote);
+
+  // Accessibility: open note on Enter or Space key when envelope focused
+  envelope.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openNote();
+    }
+  });
+</script>
+</body>
+</html>
